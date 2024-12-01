@@ -16,14 +16,11 @@ defmodule AdventOfCode.Day01 do
 
     frequencies_of_second = Enum.frequencies(second)
 
-    result =
-      first
-      |> Enum.reduce(0, fn value, acc ->
-        frequency_of_value = Map.get(frequencies_of_second, value, 0)
-        acc + frequency_of_value * value
-      end)
-
-    result
+    first
+    |> Enum.reduce(0, fn value, acc ->
+      frequency_of_value = Map.get(frequencies_of_second, value, 0)
+      acc + frequency_of_value * value
+    end)
   end
 
   defp get_and_parse_input(input) do
