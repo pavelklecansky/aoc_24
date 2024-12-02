@@ -25,25 +25,25 @@ defmodule AdventOfCode.Day02 do
     end
   end
 
-  defp safe?(value) do
+  defp safe?(levels) do
     diffs =
-      Enum.chunk_every(value, 2, 1, :discard)
+      Enum.chunk_every(levels, 2, 1, :discard)
       |> Enum.map(fn [first, second] ->
         first - second
       end)
 
-    levels_increasing_or_decresing?(diffs) && Enum.all?(diffs, &safe_diff?(&1))
+    diffs_increasing_or_decresing?(diffs) && Enum.all?(diffs, &safe_diffs?(&1))
   end
 
-  defp levels_increasing_or_decresing?(value) do
-    is_only_increasing = Enum.all?(value, fn number -> number >= 0 end)
-    is_only_decreasing = Enum.all?(value, fn number -> number <= 0 end)
+  defp diffs_increasing_or_decresing?(diffs) do
+    is_only_increasing = Enum.all?(diffs, fn number -> number >= 0 end)
+    is_only_decreasing = Enum.all?(diffs, fn number -> number <= 0 end)
 
     is_only_increasing or is_only_decreasing
   end
 
-  defp safe_diff?(level) do
-    abs(level) >= 1 && abs(level) <= 3
+  defp safe_diffs?(diff) do
+    abs(diff) >= 1 && abs(diff) <= 3
   end
 
   defp parse_input(input) do
